@@ -1,10 +1,10 @@
-name: NodeJS with Gulp
+name: Node.js with Yarn
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -15,14 +15,17 @@ jobs:
         node-version: [21.x]
 
     steps:
-    - uses: actions/checkout@v3
-
+    - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Test
+      run: yarn test
+
     - name: Build
-      run: |
-        npm install
-        gulp
+      run: yarn build
