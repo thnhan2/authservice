@@ -16,5 +16,8 @@
     "express-session": "^1.18.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.3"
+  },
+  "devDependencies": {
+    "apidoc": "^1.2.0"
   }
 }

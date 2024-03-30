@@ -1,9 +1,3 @@
-/signup get
-/login get
-/signup post
-/login post
-/logout get
-
-# sample account
-name = admin
-pwd = sa123456
+# Auth Service
+- version `1.0.0`
+- function: Register, Login,view list account, and using jwt token to authorize

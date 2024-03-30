@@ -1,3 +1,6 @@
+/* 
+    using to decode the token and get the user role
+*/
 const jwt = require("jsonwebtoken");
 const env = require("dotenv").config();
 

@@ -1,0 +1,23 @@
+{
+    "name": "API Documentation",
+    "version": "1.0.0",
+    "description": "Documentation for my API",
+    "title": "My API",
+    "url" : "http://localhost:5000",
+    "sampleUrl": "http://localhost:5000",
+    "header": {
+        "title": "My API Documentation",
+        "contentPath": "./custom-content.md"
+    },
+    "footer": {
+        "title": "My API Footer",
+        "contentPath": "./custom-footer.md"
+    },
+    "template": {
+        "forceLanguage": "en",
+        "withCompare": true,
+        "withGenerator": true
+    },
+    "input": "./routes", 
+    "output": "./public" 
+}

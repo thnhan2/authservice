@@ -1,14 +1,9 @@
 const jwt = require("jsonwebtoken");
 
-const authenticate = (req, res, next) => {
+const authenticate = async (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
-    console.log(token);
-
-    const decode = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
-
-    console.log(decode);
-
+    const decode = await jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
     req.user = decode;
     next();
   } catch (error) {
@@ -17,8 +12,9 @@ const authenticate = (req, res, next) => {
         message: "Token expired!",
       });
     } else {
-      res.json({
+      res.status(401).json({
         message: "Authentication failed!",
+        error: error.message,
       });
     }
   }
