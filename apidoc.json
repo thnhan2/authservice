@@ -1,8 +1,8 @@
 {
     "name": "API Documentation",
     "version": "1.0.0",
-    "description": "Documentation for my API",
-    "title": "My API",
+    "description": "Documentation for auth API",
+    "title": "Auth Docs API",
     "url" : "http://localhost:5000",
     "sampleUrl": "http://localhost:5000",
     "header": {

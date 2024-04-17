@@ -31,8 +31,6 @@ const register = async (req, res, next) => {
       role: req.body.role,
     });
 
-    console.log(user);
-
     await user.save();
     res.json({
       message: "User added successfully!",
@@ -49,7 +47,6 @@ const login = (req, res) => {
   var username = req.body.username;
   var password = req.body.password;
 
-  //session
   User.findOne({
     $or: [{ email: username }, { phone: username }, { username: username }],
   }).then((user) => {
@@ -62,19 +59,18 @@ const login = (req, res) => {
         } else {
           if (result) {
             let token = jwt.sign(
-              { name: user.name, role: user.role },
+              { name: user.name, role: user.role, userId: user._id },
               process.env.ACCESS_TOKEN_SECRET,
               { expiresIn: process.env.ACCESS_TOKEN_EXPIRE_TIME }
             );
             let refreshToken = jwt.sign(
-              { name: user.name },
+              { name: user.name, role: user.role, userId: user._id },
               process.env.REFRESH_TOKEN_SECRET,
               { expiresIn: process.env.REFRESH_TOKEN_EXPIRE_TIME }
             );
-            let role = user.role;
             res.json({
               token,
-              role,
+              username: user.username,
             });
           } else {
             res.json({
@@ -124,7 +120,6 @@ const getUsers = async (req, res) => {
   try {
     const users = await User.find();
     res.json({
-      message: "User list retrieved successfully!",
       users,
     });
   } catch (error) {

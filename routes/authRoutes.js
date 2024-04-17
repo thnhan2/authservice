@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const AuthController = require("../controllers/authController");
+const verifyRole = require("../middleware/authenticateMiddleware");
 
 /**
  * @api {post} /api/auth/register Register a new user
@@ -27,7 +28,7 @@ const AuthController = require("../controllers/authController");
  * "role": "manager"
  * }
  */
-router.post("/register", AuthController.register);
+router.post("/register",verifyRole(['manager']), AuthController.register);
 
 /**
  * @api {post} /api/auth/login Login a user
@@ -66,6 +67,6 @@ router.post("/refresh-token", AuthController.refreshToken);
  * @apiError {String} message An error occurred!
  * 
  */
-router.get("/get-user", AuthController.getUsers);
+router.get("/users", AuthController.getUsers);
 
 module.exports = router;
